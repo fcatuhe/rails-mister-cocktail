@@ -2,21 +2,27 @@
   <%= @cocktail.name %>
 <% end %>
 
-<h1><%= @cocktail.name %></h1>
+<h1><%= @cocktail.name %>
+  <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_cocktail_path(@cocktail) %>
+  <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, cocktail_path(@cocktail), method: :delete, data: { confirm: "Are you sure?" } %>
+</h1>
 
-<%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_cocktail_path(@cocktail) %>
-<%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, cocktail_path(@cocktail), method: :delete, data: { confirm: "Are you sure?" } %>
 
 <ul>
   <% @cocktail.doses.each do |dose| %>
     <li>
       <%= dose.ingredient.name %> - <%= dose.description %>
+      <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_cocktail_dose_path(@cocktail, dose) %>
+      <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, cocktail_dose_path(@cocktail, dose), method: :delete, data: { confirm: "Are you sure?" } %>
     </li>
   <% end %>
 </ul>
 
-
-<div class="btn btn-primary">Add ingredients</div>
-
-<%= render 'doses/form' %>
-
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  Add ingredients
+</button>
+<div class="collapse" id="collapseExample">
+  <div class="well">
+    <%= render 'doses/form' %>
+  </div>
+</div>
