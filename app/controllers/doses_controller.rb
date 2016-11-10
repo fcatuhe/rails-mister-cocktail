@@ -3,8 +3,7 @@ before_action :set_dose, only: [:edit, :update, :destroy]
 before_action :set_cocktail, only: [:create, :edit, :update, :destroy]
 
   def create
-    @dose = @cocktail.doses.new(description: dose_params[:description])
-    @dose.ingredient = Ingredient.find(dose_params[:ingredient]) unless dose_params[:ingredient].empty?
+    @dose = @cocktail.doses.new(dose_params)
     if @dose.save
       redirect_to @cocktail
     else
@@ -39,6 +38,10 @@ before_action :set_cocktail, only: [:create, :edit, :update, :destroy]
   end
 
   def dose_params
-    params.require(:dose).permit(:cocktail, :ingredient, :description)
+    temp_params = params.require(:dose).permit(:ingredient_id, :description)
+    result = {}
+    result[:description] = temp_params[:description]
+    result[:ingredient] = Ingredient.find(temp_params[:ingredient_id]) unless temp_params[:ingredient_id].empty?
+    result
   end
 end
