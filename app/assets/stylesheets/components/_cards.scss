@@ -2,8 +2,11 @@
   height: 175px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   background-size: cover !important;
+  background-position: center center;
   color: white;
   position: relative;
+  margin: 15px 0;
+  border-radius: 4px;
 }
 .card-user {
   position: absolute;
