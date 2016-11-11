@@ -2,6 +2,29 @@
   <%= @cocktail.name %>
 <% end %>
 
+<div class="media">
+  <div class="media-body">
+    <div class="media-section">
+      <h2>Pictures</h2>
+      ...
+    </div>
+    <div class="media-section">
+      <h2>Description</h2>
+      ...
+    </div>
+  </div>
+  <div class="media-aside">
+    <div class="media-section">
+      <h2>Share</h2>
+      ...
+    </div>
+    <div class="media-section">
+      <h2>382 upvotes</h2>
+      ...
+    </div>
+  </div>
+</div>
+
 <div class="row">
 
   <div class="col-sm-8">
@@ -39,15 +62,14 @@
 
   <div class="col-sm-4">
     <div style="padding-top: 20px">
-      <ul>
-        <% @cocktail.reviews.each do |review| %>
-          <li>
-            <%= review.stars %> <%= review.content %>
-          </li>
-        <% end %>
-      </ul>
-      <h4>Add a review</h4>
       <div class="well">
+        <% @cocktail.reviews.each do |review| %>
+          <% if review.persisted? %>
+            <p><%= review.stars %> <%= review.content %></p>
+          <% end %>
+        <% end %>
+        <hr>
+        <h4>Add your review</h4>
         <%= render 'reviews/form' %>
       </div>
     </div>

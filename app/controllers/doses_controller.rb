@@ -7,6 +7,7 @@ before_action :set_dose, only: [:edit, :update, :destroy]
     if @dose.save
       redirect_to @cocktail
     else
+      @review = Review.new
       render 'cocktails/show'
     end
   end
