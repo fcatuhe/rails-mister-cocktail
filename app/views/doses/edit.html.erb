@@ -1,2 +1,7 @@
+<% content_for :title do %>
+  Edit <%= @dose.cocktail.name %> ingredients
+<% end %>
+
+
 <h1>Edit Ingredient</h1>
 <%= render 'form', dose_tables: @dose %>
