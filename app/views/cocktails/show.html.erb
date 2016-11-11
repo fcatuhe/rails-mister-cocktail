@@ -2,77 +2,63 @@
   <%= @cocktail.name %>
 <% end %>
 
+
 <div class="media">
   <div class="media-body">
     <div class="media-section">
-      <h2>Pictures</h2>
-      ...
+      <h1><%= @cocktail.name %>
+        <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_cocktail_path(@cocktail) %>
+        <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, cocktail_path(@cocktail), method: :delete, data: { confirm: "Are you sure?" } %>
+      </h1>
+
     </div>
     <div class="media-section">
-      <h2>Description</h2>
-      ...
-    </div>
-  </div>
-  <div class="media-aside">
-    <div class="media-section">
-      <h2>Share</h2>
-      ...
-    </div>
-    <div class="media-section">
-      <h2>382 upvotes</h2>
-      ...
-    </div>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="col-sm-8">
-    <h1><%= @cocktail.name %>
-      <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_cocktail_path(@cocktail) %>
-      <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, cocktail_path(@cocktail), method: :delete, data: { confirm: "Are you sure?" } %>
-    </h1>
-    <h3><%= @cocktail.stars %></h3>
-    <p>
-      <%= @cocktail.description %>
-    </p>
-
-    <div>
       <% if @cocktail.photo? %>
         <%= cl_image_tag @cocktail.photo.path, width: 500, crop: :fill %>
       <% end %>
     </div>
 
-    <ul>
+    <div class="media-section">
+      <h2>Description</h2>
+        <%= @cocktail.description %>
+    </div>
+
+    <div class="media-section">
+      <h2>Ingredients</h2>
       <% @cocktail.doses.each do |dose| %>
         <% if dose.persisted? %>
-          <li>
-            <%= dose.ingredient.name %> - <%= dose.description %>
+          <p>
+            <strong><%= dose.ingredient.name %></strong> - <%= dose.description %>
             <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_dose_path(dose) %>
             <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } %>
-          </li>
+
+          </p>
         <% end %>
       <% end %>
-    </ul>
-    <h4>Add ingredients</h4>
-    <div class="well">
+      <hr>
+      <h4>Add ingredients</h4>
       <%= render 'doses/form', dose_tables: [@cocktail, @dose] %>
     </div>
-  </div>
 
-  <div class="col-sm-4">
-    <div style="padding-top: 20px">
-      <div class="well">
-        <% @cocktail.reviews.each do |review| %>
-          <% if review.persisted? %>
-            <p><%= review.stars %> <%= review.content %></p>
-          <% end %>
-        <% end %>
-        <hr>
-        <h4>Add your review</h4>
-        <%= render 'reviews/form' %>
-      </div>
+  </div>
+  <div class="media-aside">
+    <div class="media-section">
+      <h2><%= @cocktail.stars %></h2>
     </div>
+    <div class="media-section">
+      <h3>Reviews</h3>
+      <% @cocktail.reviews.each do |review| %>
+        <% if review.persisted? %>
+          <p><%= review.stars %> <%= review.content %></p>
+        <% end %>
+      <% end %>
+      <hr>
+      <h4>Add your review</h4>
+      <%= render 'reviews/form' %>
+    </div>
+<!--     <div class="media-section">
+      <h2>382 upvotes</h2>
+      ...
+    </div> -->
   </div>
-
 </div>
