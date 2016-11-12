@@ -8,7 +8,7 @@
     <div class="media-section">
       <h1><%= @cocktail.name %>
         <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_cocktail_path(@cocktail) %>
-        <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, cocktail_path(@cocktail), method: :delete, data: { confirm: "Are you sure?" } %>
+        <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, cocktail_path(@cocktail), method: :delete, data: { confirm: "Are you sure to delete #{@cocktail.name}?" } %>
       </h1>
 
     </div>
@@ -30,7 +30,7 @@
           <p>
             <strong><%= dose.ingredient.name %></strong> - <%= dose.description %>
             <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_dose_path(dose) %>
-            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } %>
+            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, dose_path(dose), method: :delete, data: { confirm: "Are you sure to delete #{dose.ingredient.name}?" } %>
 
           </p>
         <% end %>
